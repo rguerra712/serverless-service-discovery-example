@@ -1,7 +1,7 @@
 custom:
-  service-name: serverless-service-discovery-client
+  serviceName: serverless-service-discovery-client
 
-service: ${self:custom.service-name}
+service: ${self:custom.serviceName}
 provider:
   name: aws
   runtime: nodejs12.x

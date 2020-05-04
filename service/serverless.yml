@@ -1,10 +1,36 @@
 custom:
-  service-name: serverless-service-discovery-service
+  serviceName: serverless-service-discovery-service
+  baseDomain: ${ssm:MOCK_DOMAIN_NAME}
+  domainName: ${self:custom.serviceName}.${self:custom.baseDomain}
+  apiKeyName: ${self:custom.serviceName}-key
+  customDomain:
+    domainName: ${self:custom.domainName}
+    certificateName: '*.${self:custom.baseDomain}'
+    createRoute53Record: true
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
+  apiKeys:
+    - name: ${self:custom.apiKeyName}
+  ssmPublish:
+    enabled: true
+    params:
+      - path: /global/serviceUrls/${self:custom.serviceName}
+        value: ${self:custom.domainName}
+        description: Service url for example service
+        secure: false
 
-service: ${self:custom.service-name}
+service: ${self:custom.serviceName}
+
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    SERVICE_NAME: ${self:custom.serviceName}
+
+plugins:
+  - serverless-domain-manager
+  - serverless-add-api-key
+  - serverless-ssm-publish
 
 functions:
   root:

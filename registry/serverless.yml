@@ -1,7 +1,7 @@
 custom:
-  service-name: serverless-service-discovery-registry
+  serviceName: serverless-service-discovery-registry
 
-service: ${self:custom.service-name}
+service: ${self:custom.serviceName}
 
 provider:
   name: aws

@@ -14,4 +14,10 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "devDependencies": {
+    "serverless-add-api-key": "^4.1.0",
+    "serverless-domain-manager": "^3.3.2",
+    "serverless-ssm-publish": "^1.2.2"
+  },
+  "dependencies": {}
 }

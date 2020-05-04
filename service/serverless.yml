@@ -1,0 +1,16 @@
+custom:
+  service-name: serverless-service-discovery-service
+
+service: ${self:custom.service-name}
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  root:
+    handler: handler.get
+    events:
+      - http:
+          path: /
+          method: get
+

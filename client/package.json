@@ -14,4 +14,11 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.5.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.668.0",
+    "node-fetch": "^2.6.0"
+  }
 }

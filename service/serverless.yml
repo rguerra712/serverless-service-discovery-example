@@ -39,4 +39,5 @@ functions:
       - http:
           path: /
           method: get
+          private: true
 

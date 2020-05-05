@@ -1,10 +1,23 @@
 custom:
   serviceName: serverless-service-discovery-client
+  exampleServiceName: serverless-service-discovery-service
+  exampleServiceKeyName: /global/serviceKeys/${self:custom.exampleServiceName}-key
 
 service: ${self:custom.serviceName}
 provider:
   name: aws
   runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action: 'ssm:GetParameter'
+      Resource:
+        - 'arn:aws:ssm:${self:provider.region}:#{AWS::AccountId}:parameter${self:custom.exampleServiceKeyName}'
+  environment:
+    EXAMPLE_SERVICE_URL: ${ssm:/global/serviceUrls/${self:custom.exampleServiceName}}
+    EXAMPLE_SERVICE_KEY_NAME: ${self:custom.exampleServiceKeyName}
+
+plugins:
+  - serverless-pseudo-parameters
 
 functions:
   root:
